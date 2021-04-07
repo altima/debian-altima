@@ -14,7 +14,7 @@ download-iso:
 	curl -LO# https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/${ISO_IN}
 	
 build: clean download-iso
-	xorriso -osirrox on -indev debian-10.1.0-amd64-netinst.iso  -extract / isofiles/
+	xorriso -osirrox on -indev ${ISO_IN}  -extract / isofiles/
 	chmod +w -R isofiles/install.amd/
 	gunzip isofiles/install.amd/initrd.gz
 	echo preseed.cfg | cpio -H newc -o -A -F isofiles/install.amd/initrd
