@@ -3,9 +3,9 @@
 ISO_IN := debian-10.9.0-amd64-netinst.iso
 ISO_OUT := debian10-altima.iso
 
-all: info build clean
+all: info
 
-info:
+info: build
 	@echo
 	@echo '#########################'
 	@echo '# Debain ISO creation'
@@ -33,5 +33,5 @@ build: clean download-iso
 	genisoimage -r -J -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o ${ISO_OUT} isofiles
 
 clean:
-	rm -rf ${ISO_IN}
+	rm -rf *.iso
 	rm -rf isofiles/
