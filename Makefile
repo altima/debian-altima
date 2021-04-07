@@ -22,12 +22,12 @@ build: clean download-iso
 	gzip isofiles/install.amd/initrd
 	chmod -w -R isofiles/install.amd/
 
+	chmod a+w isofiles/md5sum.txt
 	cd isofiles/
-	chmod a+w md5sum.txt
 	md5sum `find -follow -type f` > md5sum.txt
-	chmod a-w md5sum.txt
-
 	cd ..
+	chmod a-w isofiles/md5sum.txt
+
 	chmod a+w isofiles/isolinux/isolinux.bin
 	genisoimage -r -J -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o ${ISO_OUT} isofiles
 
