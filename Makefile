@@ -30,7 +30,7 @@ build: clean download-iso
 	chmod a-w isofiles/md5sum.txt
 
 	chmod a+w isofiles/isolinux/isolinux.bin
-	genisoimage -z -r -J -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o ${ISO_OUT} isofiles
+	genisoimage -r -J -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o ${ISO_OUT} isofiles
 
 clean:
 	rm -rf *.iso
