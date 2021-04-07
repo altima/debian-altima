@@ -1,3 +1,5 @@
+#apt update && apt install genisoimage cpio xorriso -y
+
 ISO_IN := debian-10.9.0-amd64-netinst.iso
 ISO_OUT := debian10-altima.iso
 
@@ -8,7 +10,7 @@ info:
 	@echo '#########################'
 	@echo '# Debain ISO creation'
 	@echo '#'
-	@echo
+	@echo	
 
 download-iso:
 	curl -LO# http://debian-cd.repulsive.eu/current/amd64/iso-cd/${ISO_IN}
@@ -23,9 +25,8 @@ build: clean download-iso
 	chmod -w -R isofiles/install.amd/
 
 	chmod a+w isofiles/md5sum.txt
-	cd isofiles/
-	md5sum `find -follow -type f` > md5sum.txt
-	cd ..
+	cd isofiles/; && echo 'Entering ${PWD}/isofiles' && \
+		md5sum `find -follow -type f` > md5sum.txt && echo 'Leaving ${PWD}/isofiles'
 	chmod a-w isofiles/md5sum.txt
 
 	chmod a+w isofiles/isolinux/isolinux.bin
