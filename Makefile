@@ -1,4 +1,4 @@
-ISO_IN := debian-10.8.0-amd64-netinst.iso
+ISO_IN := debian-10.9.0-amd64-netinst.iso
 ISO_OUT := debian10-altima.iso
 
 all: info
@@ -11,7 +11,7 @@ info:
 	@echo
 
 download-iso:
-	curl -LO# https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/${ISO_IN}
+	curl -LO# http://debian-cd.repulsive.eu/current/amd64/iso-cd/${ISO_IN}
 	
 build: clean download-iso
 	xorriso -osirrox on -indev ${ISO_IN}  -extract / isofiles/
