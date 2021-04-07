@@ -1,7 +1,7 @@
 ISO_IN := debian-10.9.0-amd64-netinst.iso
 ISO_OUT := debian10-altima.iso
 
-all: info
+all: info build clean
 
 info:
 	@echo
@@ -15,6 +15,7 @@ download-iso:
 	
 build: clean download-iso
 	xorriso -osirrox on -indev ${ISO_IN}  -extract / isofiles/
+	
 	chmod +w -R isofiles/install.amd/
 	gunzip isofiles/install.amd/initrd.gz
 	echo preseed.cfg | cpio -H newc -o -A -F isofiles/install.amd/initrd
@@ -30,9 +31,8 @@ build: clean download-iso
 	chmod a+w isofiles/isolinux/isolinux.bin
 	genisoimage -r -J -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o ${ISO_OUT} isofiles
 
+clean:
 	rm -rf ${ISO_IN}
 	rm -rf isofiles/
 
-clean:
-	rm -rf *.iso
-	rm -rf isofiles/
+create: build clean
