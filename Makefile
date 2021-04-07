@@ -25,7 +25,7 @@ build: clean download-iso
 	chmod -w -R isofiles/install.amd/
 
 	chmod a+w isofiles/md5sum.txt
-	cd isofiles/; && echo 'Entering ${PWD}/isofiles' && \
+	cd isofiles/ && echo 'Entering ${PWD}/isofiles' && \
 		md5sum `find -follow -type f` > md5sum.txt && echo 'Leaving ${PWD}/isofiles'
 	chmod a-w isofiles/md5sum.txt
 
